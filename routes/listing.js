@@ -16,8 +16,11 @@ router
     validateListing,
     wrapAsync(listingController.create)
   );
+
 //New Route
 router.get("/new", isLoggedIn, wrapAsync(listingController.new));
+
+router.get("/category/:categoryName", wrapAsync(listingController.category));
 
 router
   .route("/:id")

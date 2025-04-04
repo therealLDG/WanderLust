@@ -32,7 +32,9 @@
         <div class="invalid-feedback">a valid description is required</div>
       </div>
       <div class="mb-3">
-        <label for="image URL/Link" class="form-label">Original New Image</label>
+        <label for="image URL/Link" class="form-label"
+          >Original Image</label
+        >
         <img
           src="<%= originalImageUrl %>"
           class="card-img-top show-img"
@@ -43,7 +45,66 @@
         <label for="image URL/Link" class="form-label">Upload New Image</label>
         <input name="listing[image]" type="file" class="form-control" />
       </div>
-
+      <div class="row">
+        <div class="mb-3 col-md-5">
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-secondary col-md-4 dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Choose Category
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end drop-drop">
+              <li>
+                <button class="dropdown-item" type="button">Rooms</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">
+                  Iconic Cities
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Mountains</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Castles</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">
+                  Amazing Pools
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Camping</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Farms</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Artic</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Hotel</button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button">Fallout</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3 col-md-4">
+          <input
+            name="listing[category]"
+            placeholder="category..."
+            type="text"
+            class="form-control category-input"
+            value="<%= listing.category %>"
+            readonly
+          />
+        </div>
+      </div>
       <div class="row">
         <div class="mb-3 col-md-4">
           <label for="Price" class="form-label">Price</label>
@@ -87,3 +148,5 @@
   </div>
 </form>
 <br /><br />
+
+<script src="/scripts/category.js"></script>

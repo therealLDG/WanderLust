@@ -35,6 +35,7 @@ module.exports.create = async (req, res, err) => {
     .send();
   let url = req.file.path;
   let filename = req.file.filename;
+
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   newListing.image = { url, filename };
@@ -81,4 +82,16 @@ module.exports.delete = async (req, res) => {
   console.log(deletedListing);
   req.flash("success", " Listing Deleted!");
   res.redirect("/listings");
+};
+
+module.exports.category = async (req, res) => {
+  let { categoryName } = req.params;
+  let  allListings = await Listing.find({ category: categoryName });
+  console.log( allListings);
+
+  if ( allListings.length === 0) {
+    req.flash("error", `No Listings in ${categoryName}`);
+    res.redirect("/listings");
+  }
+  res.render("listings/index.ejs", {  allListings });
 };
