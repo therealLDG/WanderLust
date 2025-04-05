@@ -1,3 +1,4 @@
+const { array } = require("joi");
 const Listing = require("../models/listing.js");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_TKOEN;
@@ -86,12 +87,29 @@ module.exports.delete = async (req, res) => {
 
 module.exports.category = async (req, res) => {
   let { categoryName } = req.params;
-  let  allListings = await Listing.find({ category: categoryName });
-  console.log( allListings);
+  let allListings = await Listing.find({ category: categoryName });
 
-  if ( allListings.length === 0) {
+  if (allListings.length === 0) {
     req.flash("error", `No Listings in ${categoryName}`);
     res.redirect("/listings");
   }
-  res.render("listings/index.ejs", {  allListings });
+  res.render("listings/index.ejs", { allListings });
 };
+
+module.exports.search = async (req, res) => {
+  let { searchString } = req.body;
+  let allListings = await Listing.find({
+    $or: [
+      { title: { $regex: searchString, $options: "i" } },
+      { country: { $regex: searchString, $options: "i" } },
+      { location: { $regex: searchString, $options: "i" } }
+    ]
+  });
+  if (allListings.length === 0) {
+    req.flash("error", `No Listings with title ${searchString} found `);
+    res.redirect("/listings");
+  }
+  res.render("listings/index.ejs", { allListings });
+};
+
+

@@ -22,6 +22,8 @@ router.get("/new", isLoggedIn, wrapAsync(listingController.new));
 
 router.get("/category/:categoryName", wrapAsync(listingController.category));
 
+router.post("/search", listingController.search);
+
 router
   .route("/:id")
   .get(wrapAsync(listingController.show))

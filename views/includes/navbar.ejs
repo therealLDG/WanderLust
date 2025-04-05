@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-md bg-body-light sticky-top border-bottom">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"
@@ -20,10 +19,11 @@
         <a class="nav-link" href="/listings">Explore</a>
       </div>
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
+        <form class="d-flex search-formm" role="search" method="post" action="/listings/search">
           <input
             class="form-control me-2 search-inp"
             type="search"
+            name="searchString"
             placeholder="Search destination"
           />
           <button class="btn search-btn" type="submit">
